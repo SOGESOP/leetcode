@@ -31,7 +31,7 @@ func romanToInt(s string) int {
 	}
 
 	// i want to find the biggest value and then look what is to the right and the left of it
-	for i, j := 0, 1; i < len(s)-1; i, j = i+1, j+1 {
+	for i := 0; i < len(s); i = i + 1 {
 
 	}
 
