@@ -1,26 +1,37 @@
 
-wrong!!!
+
+ i have mis understood how roman intagers work
 
 class Solution:
     def romanToInt(self, s: str) -> int:
-        roman_dict={"I":1, "V": 5, "X":10, "L":50}
-        total=0 
+        roman_dict={"I":1, "V": 5, "X":10, "L":50, 'C': 100, 'D': 500,'M': 1000}
+
         int_list=[]
-        # convers the list to int form to allow for easier checking
+        # converts the list to int form to allow for easier checking
         for char in s:
             int_list.append(roman_dict[char])
-        # runs through the list and checks for if it is a negative or a posotive
-        for i in range(len(int_list)-1):
-            j=i+1
-            if int_list[j]>=int_list[i]:
-                total-=int_list[i]                
-            else:
-                total+=int_list[i]
-        return total
+        largest=0
+        for idx, x in enumerate(int_list):
+            if x>largest:
+                largest=x
+                index=idx
+        positive=0
+        negative=0
+        # if value in list less than largest and comes before largests then it is taking away from largests, and if it is after largest then it is adding on
+        for i in range(len(int_list)):
 
+            if int_list[i]<largest:
+                if i<index:
+                    negative+=int_list[i]
+                elif i>index:
+                    positive+=int_list[i]
+            elif int_list[i]==largest:
+                positive+=int_list[i]
+        return positive-negative
+        
+ 
+    
 
-
-
-test_case="IIX"
+test_case="IIXL"
 instance=Solution()
 print(instance.romanToInt(test_case))
