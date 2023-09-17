@@ -5,9 +5,9 @@ import (
 )
 
 func main() {
-	var test_string string = "IV"
-
-	romanToInt(test_string)
+	var test_string string = "IX"
+	test_value := romanToInt(test_string)
+	fmt.Printf("%v", test_value)
 
 }
 
@@ -21,28 +21,32 @@ func romanToInt(s string) int {
 		'X': 10, 'L': 50,
 		'C': 100, 'D': 500,
 		'M': 1000}
-
-	var rune_form []rune = []rune(s)
+	var rune_form = []rune(s)
 	var int_form []int
-
-	// converts the roman numerals into a integer form, done using runes instead of normal python way to try out runes
+	// converts the roman numerals into a integer form, done using runes instead of normal python way to try out runes, was unnnecesary as you can just index st ring like python
 	for _, x := range rune_form {
 		int_form = append(int_form, roman_char[x])
 	}
 
 	var current int
-	for i, j := 0, 1; i < len(int_form); i, j = i+1, j+1 {
-		current += int_form[i]
-		if int_form[i] < int_form[j] {
-			current *= -1
-		} else if int_form[i] == int_form[j] {
-
+	var positive int
+	var negative int
+	for i := 0; i < len(int_form)-1; i++ {
+		j := i + 1
+		if int_form[i] == int_form[j] {
+			current += int_form[i]
+		} else if int_form[i] < int_form[j] {
+			current += int_form[i]
+			negative += current
+			current = 0
+		} else if int_form[i] > int_form[j] {
+			current += int_form[i]
+			positive += current
+			current = 0
 		}
-
 	}
+	// last number is always positive and not considered in the for loop, and then add in any values left in current from last loop
+	positive += int_form[len(int_form)-1] + current
 
-	fmt.Printf("%v", int_form)
-	var int_version int
-
-	return int_version
+	return positive - negative
 }

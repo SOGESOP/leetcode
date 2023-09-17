@@ -31,13 +31,14 @@ class Solution:
                 current+=int_list[i]
                 positive+=current
                 current=0
-        positive+=int_list[-1]
+
+        positive+=int_list[-1]+current
         return positive-negative
 
 
 
     
 
-test_case="LIIX"
+test_case="III"
 instance=Solution()
 print(instance.romanToInt(test_case))
