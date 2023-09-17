@@ -1,6 +1,5 @@
 
 
- i have mis understood how roman intagers work
 
 class Solution:
     def romanToInt(self, s: str) -> int:
@@ -17,21 +16,28 @@ class Solution:
                 index=idx
         positive=0
         negative=0
+        current=0
         # if value in list less than largest and comes before largests then it is taking away from largests, and if it is after largest then it is adding on
-        for i in range(len(int_list)):
-
-            if int_list[i]<largest:
-                if i<index:
-                    negative+=int_list[i]
-                elif i>index:
-                    positive+=int_list[i]
-            elif int_list[i]==largest:
-                positive+=int_list[i]
+        for i in range(len(int_list)-1):
+            j=i+1
+            # holds multiple consecutive numbers in a value
+            if int_list[i]==int_list[j]:
+                current+=int_list[i]
+            elif int_list[i]<int_list[j]:
+                current+=int_list[i]
+                negative+=current
+                current=0
+            elif int_list[i]>int_list[j]:
+                current+=int_list[i]
+                positive+=current
+                current=0
+        positive+=int_list[-1]
         return positive-negative
-        
- 
+
+
+
     
 
-test_case="IIXL"
+test_case="LIIX"
 instance=Solution()
 print(instance.romanToInt(test_case))

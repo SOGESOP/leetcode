@@ -30,8 +30,14 @@ func romanToInt(s string) int {
 		int_form = append(int_form, roman_char[x])
 	}
 
-	// i want to find the biggest value and then look what is to the right and the left of it
-	for i := 0; i < len(s); i = i + 1 {
+	var current int
+	for i, j := 0, 1; i < len(int_form); i, j = i+1, j+1 {
+		current += int_form[i]
+		if int_form[i] < int_form[j] {
+			current *= -1
+		} else if int_form[i] == int_form[j] {
+
+		}
 
 	}
 
